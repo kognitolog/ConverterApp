@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head><title>Конвертер валюты</title>
+</head>
+<body>
+<h2>Конвертер</h2>
+<form th:action="@{/convert}" method="post">
+    <select class="form-control" name="currency" id="currency">
+        <option value="0">Из...</option>
+        <option th:each="curr : ${currencies}"
+                th:value="${curr.numCode}"
+                th:text="${curr.name}">
+        </option>
+    </select>
+    <select class="form-control" name="newcurrency" id="newcurrency">
+        <option value="0">В...</option>
+        <option th:each="curr : ${currencies}"
+                th:value="${curr.numCode}"
+                th:text="${curr.name}">
+        </option>
+    </select>
+    <br>
+    <input name="count" type="text" size="30" placeholder="Количество">
+    <span style="color:green" th:text="((${result} == null)? '' : ${result})"></span>
+    <br>
+    <input type="submit" value="Конвертировать"/>
+</form>
+<p>Нажмите <a th:href="@{/journal}">здесь</a> для перехода в журнал операций.</p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>

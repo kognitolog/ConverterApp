@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Журнал операций</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h2>История</h2>
+<div>
+    <table border="1px">
+        <thead>
+        <tr>
+            <th> Исходная валюта</th>
+            <th> Целевая валюта</th>
+            <th> Исходная сумма</th>
+            <th> Получаемая сумма</th>
+            <th> Дата</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(journal)}">
+            <td colspan="2"> Записи журнала операций отсутствуют</td>
+        </tr>
+        <tr th:each="record : ${journal}">
+            <td><span th:text="${record.currencyFrom}"> Исходная валюта </span></td>
+            <td><span th:text="${record.currencyTo}"> Целевая валюта </span></td>
+            <td><span th:text="${record.amount}"> Исходная сумма </span></td>
+            <td><span th:text="${record.result}"> Получаемая сумма </span></td>
+            <td><span th:text="${record.date}"> Дата </span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <a th:href="@{/home}"> < Назад </a>
+</div>
+
+</body>
+</html>
